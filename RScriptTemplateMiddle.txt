@@ -1,0 +1,48 @@
+
+phasenoisedata <- list();
+
+for (count in seq_along(filenames)) {
+  phasenoisedata[[count]] <-
+    read.csv(filenames[count],
+             header = FALSE,
+             sep = "\t",
+             dec = ".");
+  
+  colnames(phasenoisedata[[count]]) = c("freq", "pnoise");
+  
+}
+
+colorarray = c("blue", "red");
+
+xlimits = vector();
+xlimits[1] = xstart;
+xlimcount = 1;
+while (xlimits[xlimcount] < xstop) {
+  xlimits[xlimcount + 1] = xlimits[xlimcount] * 10;
+  xlimcount = xlimcount + 1;
+  if (xlimits[xlimcount] > xstop) {
+    xlimits[xlimcount] = xstop;
+  }
+}
+if (xlimits[xlimcount] < (2 * xlimits[xlimcount - 1])) {
+  xlimits = xlimits[1:(xlimcount - 1)];
+}
+
+ylimits = vector();
+ylimits[1] = ystart;
+ylimcount = 1;
+while (ylimits[ylimcount] < ystop) {
+  ylimits[ylimcount + 1] = ylimits[ylimcount] + 10;
+  ylimcount = ylimcount + 1;
+  if (ylimits[ylimcount] > ystop) {
+    ylimits[ylimcount] = ystop;
+  }
+}
+
+
+
+
+
+
+(
+  plot = ggplot(NULL, aes(x = freq, y = pnoise)) +

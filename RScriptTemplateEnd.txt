@@ -1,0 +1,32 @@
+    theme(
+      panel.background = element_rect(
+        fill = graphbackground_color,
+        color = graphoutline_color,
+        size = graphoutline_size,
+        linetype = graphoutline_linetype
+      )
+    ) +
+    theme(
+      panel.grid.major = element_line(
+        color = majorgrid_color,
+        size = majorgrid_size,
+        linetype = majorgrid_linetype
+      )
+    ) +
+    theme(
+      panel.grid.minor = element_line(
+        color = minorgrid_color,
+        size = minorgrid_size,
+        linetype = minorgrid_linetype
+      )
+    ) +
+    scale_x_log10(name = "Offset Frequency [Hz]", breaks = xlimits, labels = freq_formatter(xlimits), limits = c(xstart,xstop), expand = c(0,0), minor_breaks=log10_minor_break()) +
+    annotation_logticks(sides = "tb") +
+    scale_y_continuous(name = "SSB Phase Noise [dBc/Hz]", breaks = ylimits, limits = c(ystart,ystop), expand = c(0,0),  sec.axis = dup_axis()) +
+    theme(axis.text = element_text(size = axistextsize, angle = axistextangle)) +
+    theme(axis.title = element_text(size = (axistextsize + 4), angle = axistextangle)) +
+    theme(plot.title = element_text(size = (axistextsize + 10), angle = axistextangle)) +
+    ggtitle(PhaseNoisePlotTitle) +
+    theme(plot.title = element_text(hjust = 0.5))
+)
+print(plot)
